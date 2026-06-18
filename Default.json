@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "settings": {
+    "brightness": 100,
+    "accentColor": "#2d8cff"
+  },
+  "presetsBySlot": {
+    "P1": null,
+    "P2": null,
+    "P3": null,
+    "P4": null,
+    "P5": null,
+    "P6": null,
+    "P7": null,
+    "P8": null,
+    "P9": null,
+    "P10": null,
+    "P11": null,
+    "P12": null,
+    "P13": null,
+    "P14": null,
+    "P15": null,
+    "P16": null,
+    "P17": null,
+    "P18": null,
+    "P19": null,
+    "P20": null
+  }
+}

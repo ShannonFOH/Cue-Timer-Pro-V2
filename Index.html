@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no" />
+  <title>Cue Timer Pro</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app">
+    <header class="topbar">
+      <div class="left-controls">
+        <button id="btn-start" class="control-btn">START</button>
+        <button id="btn-pause" class="control-btn">PAUSE</button>
+        <button id="btn-stop" class="control-btn">STOP</button>
+        <button id="btn-reset" class="control-btn">RESET</button>
+      </div>
+
+      <div class="right-controls">
+        <button id="btn-mode" class="control-btn">EDIT MODE</button>
+        <button id="btn-fullscreen" class="control-btn">FULLSCREEN</button>
+        <button id="btn-export" class="control-btn">EXPORT</button>
+        <label class="import-label control-btn">
+          IMPORT
+          <input id="import-file" type="file" accept="application/json" hidden />
+        </label>
+      </div>
+    </header>
+
+    <section class="settings-bar">
+      <div class="setting-group">
+        <label for="brightness-range">Brightness</label>
+        <input id="brightness-range" type="range" min="20" max="100" step="1" />
+        <span id="brightness-value">100%</span>
+      </div>
+
+      <div class="setting-group">
+        <label for="global-accent">Accent</label>
+        <input id="global-accent" type="color" />
+      </div>
+
+      <div class="setting-group wake-status-wrap">
+        <span id="wake-status">Wake lock: idle</span>
+      </div>
+    </section>
+
+    <main class="layout-shell">
+      <section class="preset-row top-row" id="top-row"></section>
+
+      <section class="center-row">
+        <div class="side-column left-side" id="left-side"></div>
+
+        <div class="center-stage">
+          <div id="active-preset-name" class="active-preset-name">STANDBY</div>
+          <div id="timer-display" class="timer-display">STANDBY</div>
+          <div id="status-line" class="status-line">No preset loaded</div>
+        </div>
+
+        <div class="side-column right-side" id="right-side"></div>
+      </section>
+
+      <section class="preset-row bottom-row" id="bottom-row"></section>
+    </main>
+  </div>
+
+  <div id="flash-overlay" class="flash-overlay hidden"></div>
+
+  <div id="preset-modal" class="modal hidden" aria-hidden="true">
+    <div class="modal-panel">
+      <div class="modal-header">
+        <h2 id="modal-title">Preset Editor</h2>
+        <button id="btn-close-modal" class="small-btn">X</button>
+      </div>
+
+      <div class="modal-body">
+        <div class="form-grid">
+          <label>
+            Preset Name
+            <input id="preset-name" type="text" maxlength="40" />
+          </label>
+
+          <label>
+            Slot
+            <select id="preset-slot"></select>
+          </label>
+
+          <label>
+            Minutes
+            <input id="preset-minutes" type="number" min="0" max="999" />
+          </label>
+
+          <label>
+            Seconds
+            <input id="preset-seconds" type="number" min="0" max="59" />
+          </label>
+
+          <label>
+            Theme Color
+            <input id="preset-color" type="color" />
+          </label>
+        </div>
+
+        <div class="cue-editor-header">
+          <h3>Cues</h3>
+          <button id="btn-add-cue" class="small-btn">Add Cue</button>
+        </div>
+
+        <div id="cue-list" class="cue-list"></div>
+      </div>
+
+      <div class="modal-footer">
+        <button id="btn-delete-preset" class="danger-btn">DELETE</button>
+        <button id="btn-save-preset" class="primary-btn">SAVE</button>
+      </div>
+    </div>
+  </div>
+
+  <template id="cue-row-template">
+    <div class="cue-row" draggable="true">
+      <div class="cue-drag-handle">::</div>
+
+      <label>
+        Min
+        <input class="cue-minutes" type="number" min="0" max="999" />
+      </label>
+
+      <label>
+        Sec
+        <input class="cue-seconds" type="number" min="0" max="59" />
+      </label>
+
+      <label>
+        Color
+        <input class="cue-color" type="color" />
+      </label>
+
+      <label>
+        Flash Sec
+        <input class="cue-duration" type="number" min="1" max="30" />
+      </label>
+
+      <button class="cue-up small-btn" type="button">Up</button>
+      <button class="cue-down small-btn" type="button">Down</button>
+      <button class="cue-delete danger-btn" type="button">Delete</button>
+    </div>
+  </template>
+
+  <script src="storage.js"></script>
+  <script src="cue-engine.js"></script>
+  <script src="dragdrop.js"></script>
+  <script src="wake-lock.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
